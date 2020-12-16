@@ -1,3 +1,31 @@
 <resources>
-    <string name="app_name">Mediconsent</string>
+    <string name="app_name">FirstApp</string>
+    <string name="my_string">My great text</string>
+    <string name="button_text">Button</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="connect">Connect</string>
+    <string name="enterName">Enter your name</string>
+    <string name="search">Search</string>
+    <string name="language">Language</string>
+    <string name="noRdv">You don\'t have any planned rendez-vous for today. Please ask the secretary for further informations.</string>
+    <string name="review">Review</string>
+    <string name="comment">Comment</string>
+    <string name="welcome">Welcome</string>
+    <string name="validate">Validate</string>
+    <string name="title">Title</string>
+    <string name="name">Name</string>
+    <string name="firstName">First name</string>
+    <string name="BirthDate">Date of birth</string>
+    <string name="myRDV">My rendezvous :</string>
+    <string name="typeRDV">Type of rendezvous</string>
+    <string name="dateRDV">Date of rendezvous</string>
+    <string name="hourRDV">Hour of rendrevous</string>
+    <string name="back">Back</string>
+    <string name="consentForm">Consent form</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="signature">Signature</string>
+    <string name="Thanks">Thank you for your registration.</string>
+    <string name="chooseLanguage">Choose language</string>
 </resources>
