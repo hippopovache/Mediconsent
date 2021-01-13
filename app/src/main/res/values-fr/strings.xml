@@ -1,7 +1,4 @@
 <resources>
-    <string name="app_name">PremiereApplication</string>
-    <string name="my_string">Mon super texte</string>
-    <string name="button_text">Bouton</string>
     <string name="username">Utilisateur</string>
     <string name="password">Mot de passe</string>
     <string name="connect">Connexion</string>
@@ -28,4 +25,5 @@
     <string name="signature">Signature</string>
     <string name="Thanks">Merci pour votre enregistrement</string>
     <string name="chooseLanguage">Choisissez votre langue</string>
+    <string name="answers">Réponses</string>
 </resources>
