@@ -26,4 +26,5 @@
     <string name="Thanks">Merci pour votre enregistrement</string>
     <string name="chooseLanguage">Choisissez votre langue</string>
     <string name="answers">Réponses</string>
+    <string name="longText">Ceci est juste un long texte pour tester l\'application, vous ne devriez pas voir ça en production. C\'est ou outil de développement.</string>
 </resources>

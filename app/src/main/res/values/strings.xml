@@ -1,7 +1,4 @@
 <resources>
-    <string name="app_name">FirstApp</string>
-    <string name="my_string">My great text</string>
-    <string name="button_text">Button</string>
     <string name="username">Username</string>
     <string name="password">Password</string>
     <string name="connect">Connect</string>
@@ -29,4 +26,6 @@
     <string name="Thanks">Thank you for your registration.</string>
     <string name="chooseLanguage">Choose language</string>
     <string name="answers">Answers</string>
+    <string name="app_name" translatable="false">Mediconsent</string>
+    <string name="longText">This is just a long text to test the application, you shoul not see this on production. This is a dev tool.</string>
 </resources>
