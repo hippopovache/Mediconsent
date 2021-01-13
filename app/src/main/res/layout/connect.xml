@@ -2,7 +2,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/cardview_dark_background"
     android:gravity="center"
     android:orientation="vertical">
 
@@ -10,31 +9,32 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/username"
-        android:textColor="@color/white"
         android:textSize="28sp" />
 
     <EditText
-        android:id="@+id/connect_edittext_username"
+        android:id="@+id/connect_username"
         android:layout_width="200dp"
         android:layout_height="30dp"
-        android:background="@color/white" />
+        android:inputType="text" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/password"
-        android:textColor="@color/white"
         android:textSize="28sp" />
 
     <EditText
-        android:id="@+id/connect_edittext_password"
+        android:id="@+id/connect_password"
         android:layout_width="200dp"
         android:layout_height="30dp"
-        android:background="@color/white" />
+        android:inputType="textPassword" />
 
     <Button
         android:id="@+id/connect_button_connect"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/connect" />
+        android:layout_marginTop="15dp"
+        android:paddingHorizontal="5dp"
+        android:text="@string/connect"
+        android:textSize="25sp" />
 </LinearLayout>
