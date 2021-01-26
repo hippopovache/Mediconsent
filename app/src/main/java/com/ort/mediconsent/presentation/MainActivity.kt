@@ -1,10 +1,10 @@
 package com.ort.mediconsent.presentation
 
 import android.os.Bundle
-import android.text.TextUtils.replace
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.commit
 import com.ort.mediconsent.R
+import com.ort.mediconsent.presentation.search.SearchFragment
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -12,9 +12,9 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.connect)
     }
 
-    fun displaySearchLayout(){
-        supportFragmentManager.commit{
-            replace(R.id.fragment_container, )
+    fun displaySearchLayout() {
+        supportFragmentManager.commit {
+            add(R.id.fragment_container, SearchFragment())
         }
     }
 }
