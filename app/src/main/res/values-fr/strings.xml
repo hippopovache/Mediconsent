@@ -1,0 +1,30 @@
+<resources>
+    <string name="username">Utilisateur</string>
+    <string name="password">Mot de passe</string>
+    <string name="connect">Connexion</string>
+    <string name="enterName">Entrez votre nom</string>
+    <string name="search">Rechercher</string>
+    <string name="language">Langue</string>
+    <string name="noRdv">Aucun rendez-vous programmé aujourd\'hui. Merci de vous renseignez auprès d\'une secrétaire pour plus d\'informations</string>
+    <string name="review">Avis</string>
+    <string name="comment">Remarque</string>
+    <string name="welcome">Bienvenue</string>
+    <string name="validate">Valider</string>
+    <string name="title">Civilité</string>
+    <string name="name">Name</string>
+    <string name="firstName">Prénom</string>
+    <string name="BirthDate">Date de naissance</string>
+    <string name="myRDV">Mon rendez-vous :</string>
+    <string name="typeRDV">Type de rendez-vous</string>
+    <string name="dateRDV">Date de rendez-vous</string>
+    <string name="hourRDV">Heure de rendez-vous</string>
+    <string name="back">Retour</string>
+    <string name="consentForm">Formulaire de consentement</string>
+    <string name="yes">Oui</string>
+    <string name="no">Non</string>
+    <string name="signature">Signature</string>
+    <string name="Thanks">Merci pour votre enregistrement</string>
+    <string name="chooseLanguage">Choisissez votre langue</string>
+    <string name="answers">Réponses</string>
+    <string name="longText">Ceci est juste un long texte pour tester l\'application, vous ne devriez pas voir ça en production. C\'est ou outil de développement.</string>
+</resources>
