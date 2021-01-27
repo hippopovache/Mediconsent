@@ -12,7 +12,7 @@ class MockUserRepository : UserRepository {
         return login == "1" && mdp == "1"
     }
 
-    override suspend fun getUserRdvForToday(id: Int): Examen {
+    override suspend fun getUserRdvForToday(firstName: String, name: String): Examen {
         return Examen(
             1,
             TypeExamen(1, "type1"),

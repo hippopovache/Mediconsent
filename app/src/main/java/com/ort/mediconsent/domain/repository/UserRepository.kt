@@ -6,5 +6,5 @@ interface UserRepository {
     //suspend sous entend que le code utilise co routines (async)
     suspend fun getUserConnect(id: String, mdp: String): Boolean
 
-    suspend fun getUserRdvForToday(id: Int): Examen
+    suspend fun getUserRdvForToday(firstname: String, name: String): Examen
 }
