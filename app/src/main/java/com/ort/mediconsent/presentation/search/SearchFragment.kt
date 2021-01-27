@@ -1,7 +1,9 @@
 package com.ort.mediconsent.presentation.search
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -15,13 +17,13 @@ class SearchFragment : Fragment() {
     private val viewModel: SearchViewModel by viewModels()
 
 
-    /*override fun onCreateView(
+    override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_movie_detail, container, false)
-    }*/
+        return inflater.inflate(R.layout.search, container, false)
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -31,7 +33,7 @@ class SearchFragment : Fragment() {
         viewModel.state.observe(viewLifecycleOwner, ::updateState)
 
         /*arguments?.getString(KEY_ID)?.let {
-            viewModel.getMovieDetail(it)
+            viewModel.getUserRdv(it)
         }*/
     }
 

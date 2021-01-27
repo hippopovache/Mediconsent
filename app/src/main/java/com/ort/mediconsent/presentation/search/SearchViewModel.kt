@@ -12,13 +12,13 @@ class SearchViewModel(application: Application) : AndroidViewModel(application) 
     val state: LiveData<SearchState> get() = _state
 
     /*fun getMovieDetail(id: String) {
-        _state.value = SearchState.LoadingState
+        _state.value = ConnectState.LoadingState
 
         viewModelScope.launch {
             try {
-                _state.value = SearchState.SuccessState
+                _state.value = ConnectState.SuccessState
             } catch (e: Exception) {
-                _state.value = SearchState.ErrorState
+                _state.value = ConnectState.ErrorState
             }
         }
     }*/

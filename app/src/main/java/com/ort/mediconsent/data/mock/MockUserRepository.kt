@@ -8,8 +8,8 @@ import java.util.*
 
 class MockUserRepository : UserRepository {
     //vu qu'on override, il faut utiliser le suspend comme dans la fonction de base
-    override suspend fun getUserConnect(login: Int, mdp: String): Boolean {
-        return login === 1 && mdp == "1"
+    override suspend fun getUserConnect(login: String, mdp: String): Boolean {
+        return login == "1" && mdp == "1"
     }
 
     override suspend fun getUserRdvForToday(id: Int): Examen {
@@ -20,7 +20,7 @@ class MockUserRepository : UserRepository {
                 1,
                 "hopital de Die",
                 "Adresse de l'hopital de Die",
-                "0626325262",
+                "0426325262",
                 "url du sigle"
             ),
             null,
