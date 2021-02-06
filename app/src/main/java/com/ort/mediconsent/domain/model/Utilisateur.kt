@@ -5,5 +5,5 @@ data class Utilisateur(
     val nom_utilisateur: String,
     val prenom_utilisateur: String,
     val mot_de_passe_utilisateur: String,
-    val numero_securite_sociale: Int,
+    val numero_securite_sociale: String,
 )

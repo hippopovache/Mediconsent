@@ -5,7 +5,7 @@ import java.util.*
 data class Examen(
     val id_examen: Int,
     val typeExamen: TypeExamen,
-    val etablissement: Etablissement,
+    val etablissement: Etablissement?,
     val avis: Avis?,
     val date_examen: Date,
     val consentement: Boolean,

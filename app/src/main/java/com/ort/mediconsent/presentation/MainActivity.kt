@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.commit
 import com.ort.mediconsent.R
 import com.ort.mediconsent.presentation.connect.ConnectFragment
+import com.ort.mediconsent.presentation.rdvList.RdvListFragment
 import com.ort.mediconsent.presentation.search.SearchFragment
 
 class MainActivity : AppCompatActivity() {
@@ -21,6 +22,12 @@ class MainActivity : AppCompatActivity() {
             replace(R.id.fragment_container, SearchFragment())
             //addToBackStack permet de conserver l'état précédant
             addToBackStack(null)
+        }
+    }
+
+    fun displayRdvListLayout() {
+        supportFragmentManager.commit {
+            //replace(R.id.fragment_container, RdvListFragment())
         }
     }
 }

@@ -36,21 +36,14 @@ class ConnectFragment : Fragment() {
         connectButton = view.findViewById(R.id.connect_button_connect)
 
         connectButton.setOnClickListener {
-            val activity: MainActivity? = activity as? MainActivity
 
             if (connectUsername.text.toString() != "" && connectPassword.text.toString() != "") {
-                val isConnected = viewModel.getUserConnect(
+                viewModel.getUserConnect(
                     connectUsername.text.toString(), connectPassword.text.toString()
-                )
-
-                if (isConnected) {
-                    Toast.makeText(requireContext(), "Connécté", Toast.LENGTH_LONG)
-                        .show()
-                    activity?.displaySearchLayout()
-                } else {
-                    Toast.makeText(requireContext(), "Login ou mdp incorrect", Toast.LENGTH_LONG)
-                        .show()
-                }
+                ).toString()
+                /*viewModel.getUserConnect(
+                    connectUsername.text.toString(), connectPassword.text.toString()
+                )*/
             } else {
                 Toast.makeText(requireContext(), "Entrez un login et un mdp svp", Toast.LENGTH_LONG)
                     .show()
@@ -68,16 +61,14 @@ class ConnectFragment : Fragment() {
     private fun updateState(state: ConnectState) {
         when (state) {
             is ConnectState.ErrorState -> {
-                Toast.makeText(requireContext(), "Error", Toast.LENGTH_LONG).show()
+                Toast.makeText(requireContext(), "Mauvais login ou mdp", Toast.LENGTH_LONG).show()
             }
             is ConnectState.LoadingState -> {
-                Toast.makeText(requireContext(), "Loading", Toast.LENGTH_LONG).show()
             }
             is ConnectState.SuccessState -> {
-                Toast.makeText(requireContext(), "Success", Toast.LENGTH_LONG).show()
-                /*if (state.movie.poster.isNotEmpty() && state.movie.poster.isNotBlank()) {
-                    Picasso.get().load(state.movie.poster).into(image)
-                }*/
+                Toast.makeText(requireContext(), "Connexion efféctuée", Toast.LENGTH_LONG).show()
+                val activity: MainActivity? = activity as? MainActivity
+                activity?.displaySearchLayout()
             }
         }
     }
