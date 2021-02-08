@@ -47,6 +47,10 @@ class MediconsentExamenRepository : ExamenRepository {
             return apiLocal.getUserRdvForToday(firstname, name)[0].toExamen()
     }
 
+    override suspend fun getExamenById(id: Int): Examen {
+        return apiLocal.getExamenById(id).toExamen()
+    }
+
     private fun ApiExamen.toExamen() = Examen(
         this.id_examen,
         this.type_examen,

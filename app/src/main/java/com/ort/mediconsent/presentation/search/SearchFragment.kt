@@ -57,18 +57,16 @@ class SearchFragment : Fragment() {
         viewModel.state.observe(viewLifecycleOwner, ::updateState)
     }
 
-    private fun updateState(state: SearchState) {
-        when (state) {
-            is SearchState.ErrorState -> {
-                Toast.makeText(requireContext(), "Pas d'éxamen trouvé", Toast.LENGTH_LONG).show()
-            }
-            is SearchState.LoadingState -> {
-            }
-            is SearchState.SuccessState -> {
-                Toast.makeText(requireContext(), "Examen trouvé", Toast.LENGTH_LONG).show()
-                val activity: MainActivity? = activity as? MainActivity
-                activity?.displayRdvListLayout()
-            }
+    private fun updateState(state: SearchState) = when (state) {
+        is SearchState.ErrorState -> {
+            Toast.makeText(requireContext(), "Pas d'éxamen trouvé", Toast.LENGTH_LONG).show()
+        }
+        is SearchState.LoadingState -> {
+        }
+        is SearchState.SuccessState -> {
+            Toast.makeText(requireContext(), "Examen trouvé", Toast.LENGTH_LONG).show()
+            val activity: MainActivity = activity as MainActivity
+            activity.displayRdvListLayout(state.examen.id_examen)
         }
     }
 

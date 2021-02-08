@@ -4,4 +4,5 @@ import com.ort.mediconsent.domain.model.Examen
 
 interface ExamenRepository {
     suspend fun getUserRdvForToday(firstname: String, name: String): Examen
+    suspend fun getExamenById(id: Int): Examen
 }

@@ -64,9 +64,9 @@ class ConnectFragment : Fragment() {
                 Toast.makeText(requireContext(), "Mauvais login ou mdp", Toast.LENGTH_LONG).show()
             }
             is ConnectState.LoadingState -> {
+                Toast.makeText(requireContext(), "Connexion", Toast.LENGTH_SHORT).show()
             }
             is ConnectState.SuccessState -> {
-                Toast.makeText(requireContext(), "Connexion efféctuée", Toast.LENGTH_LONG).show()
                 val activity: MainActivity? = activity as? MainActivity
                 activity?.displaySearchLayout()
             }

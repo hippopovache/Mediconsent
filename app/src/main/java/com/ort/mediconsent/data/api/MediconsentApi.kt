@@ -22,4 +22,9 @@ interface MediconsentApi {
         @Path("prenom") firstName: String,
         @Path("nom") name: String,
     ): List<ApiExamen>
+
+    @GET("examen/{id}")
+    suspend fun getExamenById(
+        @Path("id") id: Int
+    ): ApiExamen
 }

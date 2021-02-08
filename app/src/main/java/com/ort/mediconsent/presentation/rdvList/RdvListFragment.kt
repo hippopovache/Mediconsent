@@ -5,24 +5,34 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.ort.mediconsent.R
-import com.ort.mediconsent.presentation.MainActivity
 
-class RdvListFragment : Fragment() {
+class RdvListFragment() : Fragment() {
 
     private lateinit var text1: TextView
     private lateinit var text2: TextView
     private lateinit var consentButton: Button
     private lateinit var backButton: Button
 
-
     private val viewModel: RdvListViewModel by viewModels()
-    private val activity: MainActivity? = null
+
+    companion object {
+        private const val KEY_ID = "key_id"
+
+        fun newInstance(id: Int): RdvListFragment {
+            val bundle = Bundle()
+            bundle.putInt(KEY_ID, id)
+
+            val fragment = RdvListFragment()
+            fragment.arguments = bundle
+
+            return fragment
+        }
+    }
 
 
     override fun onCreateView(
@@ -30,7 +40,7 @@ class RdvListFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.search, container, false)
+        return inflater.inflate(R.layout.rdv_list, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -44,9 +54,13 @@ class RdvListFragment : Fragment() {
         consentButton.setOnClickListener {
         }
         backButton.setOnClickListener {
+            fragmentManager?.popBackStackImmediate()
         }
-
         viewModel.state.observe(viewLifecycleOwner, ::updateState)
+
+        arguments?.getInt(KEY_ID)?.let {
+            viewModel.getExamenDetails(it)
+        }
     }
 
     private fun updateState(state: RdvListState) {
@@ -57,10 +71,10 @@ class RdvListFragment : Fragment() {
             is RdvListState.LoadingState -> {
             }
             is RdvListState.SuccessState -> {
-                Toast.makeText(requireContext(), "Success", Toast.LENGTH_LONG).show()
-                val activity: MainActivity? = activity
+                text1.text = state.examen.id_examen.toString()
             }
         }
     }
+
 
 }

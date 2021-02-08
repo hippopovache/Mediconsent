@@ -25,9 +25,9 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun displayRdvListLayout() {
+    fun displayRdvListLayout(id: Int) {
         supportFragmentManager.commit {
-            //replace(R.id.fragment_container, RdvListFragment())
+            replace(R.id.fragment_container, RdvListFragment.newInstance(id))
         }
     }
 }
