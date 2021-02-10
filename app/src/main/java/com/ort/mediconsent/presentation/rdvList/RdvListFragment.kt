@@ -74,7 +74,6 @@ class RdvListFragment() : Fragment() {
             is RdvListState.SuccessState -> {
                 text1.append(android.text.format.DateFormat.format("hh:mm", state.examen.date_examen))
                 text1.append(" ")
-                println("oue " + state.examen.typeExamen)
                 text1.append(R.string.typeRDV.toString())
                 text1.append(state.examen.typeExamen.libelle_type_examen)
             }
