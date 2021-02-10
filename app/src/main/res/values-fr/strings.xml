@@ -15,7 +15,7 @@
     <string name="firstName">Prénom</string>
     <string name="BirthDate">Date de naissance</string>
     <string name="myRDV">Mon rendez-vous :</string>
-    <string name="typeRDV">Type de rendez-vous</string>
+    <string name="typeRDV">"Le type de rendez-vous est : "</string>
     <string name="dateRDV">Date de rendez-vous</string>
     <string name="hourRDV">Heure de rendez-vous</string>
     <string name="back">Retour</string>
@@ -28,4 +28,5 @@
     <string name="answers">Réponses</string>
     <string name="longText">Ceci est juste un long texte pour tester l\'application, vous ne devriez pas voir ça en production. C\'est ou outil de développement.</string>
     <string name="enterFirstName">Entrez votre prénom</string>
+    <string name="rendezvous">"Bonjour, vous avez un rendez-vous programmé à "</string>
 </resources>

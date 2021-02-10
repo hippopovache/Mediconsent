@@ -15,7 +15,7 @@
     <string name="firstName">First name</string>
     <string name="BirthDate">Date of birth</string>
     <string name="myRDV">My rendezvous :</string>
-    <string name="typeRDV">Type of rendezvous</string>
+    <string name="typeRDV">"The type of appointment is : "</string>
     <string name="dateRDV">Date of rendezvous</string>
     <string name="hourRDV">Hour of rendrevous</string>
     <string name="back">Back</string>
@@ -29,4 +29,5 @@
     <string name="app_name" translatable="false">Mediconsent</string>
     <string name="longText">This is just a long text to test the application, you shoul not see this on production. This is a dev tool.</string>
     <string name="enterFirstName">Enter your firstname</string>
+    <string name="rendezvous">"Hello, you have a planned appointment today at "</string>
 </resources>
