@@ -1,17 +1,17 @@
 package com.ort.mediconsent.data.repository
 
 
+import android.graphics.Bitmap
 import com.ort.mediconsent.data.api.MediconsentApi
-import com.ort.mediconsent.data.model.ApiQuestion
-import com.ort.mediconsent.domain.model.Question
-import com.ort.mediconsent.domain.repository.QuestionRepository
+import com.ort.mediconsent.domain.model.Reponse
+import com.ort.mediconsent.domain.repository.ReponseRepository
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 
-class MediconsentQuestionRepository : QuestionRepository {
+class MediconsentReponseRepository : ReponseRepository {
     private val retrofit: Retrofit
     private val retrofitLocal: Retrofit
 
@@ -37,20 +37,12 @@ class MediconsentQuestionRepository : QuestionRepository {
 
     private val api = retrofit.create(MediconsentApi::class.java)
     private val apiLocal = retrofitLocal.create(MediconsentApi::class.java)
-
-
-    override suspend fun getExamenQuestions(idFormulaire: Int): List<Question> {
-        return apiLocal.getExamenQuestions(idFormulaire).map {
-            it.toQuestion()
-        }
+    override suspend fun sendReponses(reponses: List<Reponse>) {
+        //TODO
     }
 
-    private fun ApiQuestion.toQuestion() = Question(
-        this.id_question,
-        this.libelle_question,
-        this.isCheckbox,
-        this.icone
-    )
-
+    override suspend fun sendSignature(bitmap: Bitmap) {
+        //TODO
+    }
 
 }

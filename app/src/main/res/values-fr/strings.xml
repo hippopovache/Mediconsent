@@ -19,7 +19,7 @@
     <string name="dateRDV">Date de rendez-vous</string>
     <string name="hourRDV">Heure de rendez-vous</string>
     <string name="back">Retour</string>
-    <string name="consentForm">Formulaire de consentement</string>
+    <string name="consentForm">Formulaire de consentement ou avis</string>
     <string name="yes">Oui</string>
     <string name="no">Non</string>
     <string name="signature">Signature</string>
@@ -31,4 +31,5 @@
     <string name="rendezvous">"Bonjour, vous avez un rendez-vous programmé à "</string>
     <string name="answerunder">Répondez dans la case ci dessous</string>
     <string name="next">Suivant</string>
+    <string name="reset">effacer</string>
 </resources>

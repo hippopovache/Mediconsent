@@ -12,12 +12,13 @@ import com.ort.mediconsent.R
 import com.ort.mediconsent.domain.model.Examen
 import com.ort.mediconsent.domain.model.Question
 import com.ort.mediconsent.domain.model.Reponse
+import com.ort.mediconsent.presentation.MainActivity
 
 class QuestionFragment : Fragment() {
 
     private lateinit var textview: TextView
     private lateinit var edittext: EditText
-    private lateinit var btn_next: Button
+    private lateinit var btnNext: Button
     private lateinit var backButton: Button
     private lateinit var question: Question
     private lateinit var yes: RadioButton
@@ -26,7 +27,7 @@ class QuestionFragment : Fragment() {
     private lateinit var questions: List<Question>
     private lateinit var examen: Examen
 
-    private val viewModel: QuestionViewModel by viewModels()
+    private val questionViewModel: QuestionViewModel by viewModels()
 
     companion object {
         private const val KEY_ID = "key_id"
@@ -58,20 +59,20 @@ class QuestionFragment : Fragment() {
         textview = view.findViewById(R.id.question_text_view)
         edittext = view.findViewById(R.id.question_edittext)
         backButton = view.findViewById(R.id.question_btn_back)
-        btn_next = view.findViewById(R.id.question_btn_next)
+        btnNext = view.findViewById(R.id.question_btn_next)
         radioGroup = view.findViewById(R.id.question_radio_group)
         var index = 0
         yes = view.findViewById(R.id.question_yes)
         no = view.findViewById(R.id.question_no)
         var reponses = mutableListOf<Reponse>()
 
-        viewModel.state.observe(viewLifecycleOwner, ::updateState)
+        questionViewModel.state.observe(viewLifecycleOwner, ::updateState)
 
         arguments?.getInt(KEY_ID)?.let {
-            viewModel.getExamenQuestions(it)
+            questionViewModel.getExamenQuestions(it)
         }
 
-        btn_next.setOnClickListener {
+        btnNext.setOnClickListener {
             if (question.id_question != 0) {
                 if (edittext.text.toString() == "" && radioGroup.checkedRadioButtonId == -1) {
                     Toast.makeText(
@@ -81,7 +82,14 @@ class QuestionFragment : Fragment() {
                     ).show()
                 } else {
                     if (edittext.text.toString() != "") {
-                        reponses.add(Reponse(examen, question, edittext.text.toString(), edittext.text.toString()))
+                        reponses.add(
+                            Reponse(
+                                examen,
+                                question,
+                                edittext.text.toString(),
+                                edittext.text.toString()
+                            )
+                        )
                     } else {
                         if (radioGroup.checkedRadioButtonId == R.id.question_yes) {
                             reponses.add(Reponse(examen, question, "Oui", "Oui"))
@@ -94,12 +102,13 @@ class QuestionFragment : Fragment() {
                     if (index >= questions.size) {
                         Toast.makeText(
                             requireContext(),
-                            "Fin des questions",
-                            Toast.LENGTH_LONG
+                            "Merci pour vos réponses, vous pouvez signer maintenant",
+                            Toast.LENGTH_SHORT
                         ).show()
-                        println(reponses.toString())
+                        val activity: MainActivity = activity as MainActivity
+                        activity.displaySignatureLayout(examen.id_examen, reponses)
                     } else {
-                        question = questions.get(index)
+                        question = questions[index]
                         edittext.setText("")
                         radioGroup.clearCheck()
                         if (question.isCheckbox) {
@@ -120,7 +129,7 @@ class QuestionFragment : Fragment() {
             } else {
                 reponses.removeLast()
                 index -= 1
-                question = questions.get(index)
+                question = questions[index]
                 edittext.setText("")
                 radioGroup.clearCheck()
                 textview.text = question.libelle_question

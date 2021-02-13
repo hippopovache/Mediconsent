@@ -8,30 +8,20 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/review"
-        android:textSize="25sp" />
+        android:layout_marginHorizontal="40dp"
+        android:labelFor="@id/question_edittext"
+        android:text="@string/signature"
+        android:textAlignment="center"
+        android:textSize="18sp" />
 
-    <RatingBar
-        android:id="@+id/review_rating"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:numStars="5"
-        android:stepSize="1" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:labelFor="@id/review_comment"
-        android:text="@string/comment"
-        android:textSize="25sp" />
-
-    <EditText
-        android:id="@+id/review_comment"
+    <com.github.gcacace.signaturepad.views.SignaturePad xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/signature_pad"
         android:layout_width="match_parent"
         android:layout_height="300dp"
-        android:layout_marginHorizontal="40dp"
-        android:importantForAutofill="no"
-        android:inputType="text" />
+        android:layout_marginTop="20dp"
+        android:layout_marginHorizontal="10dp"
+        android:background="@drawable/border"
+        app:penColor="@android:color/black" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -41,19 +31,29 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/review_back"
+            style="@style/Widget.AppCompat.ButtonBar"
+            android:id="@+id/signature_btn_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="20dp"
             android:text="@string/back" />
 
         <Button
-            android:id="@+id/review_validate"
+            style="@style/Widget.AppCompat.ButtonBar"
+            android:id="@+id/signature_btn_reset"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="20dp"
-            android:text="@string/validate" />
+            android:text="@string/reset" />
 
     </LinearLayout>
+
+    <Button
+        android:id="@+id/signature_btn_validate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/validate" />
+
 
 </LinearLayout>

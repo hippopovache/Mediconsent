@@ -48,8 +48,6 @@ class RdvListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
-
         text1 = view.findViewById(R.id.rdv_list_textview_info_1)
         consentButton = view.findViewById(R.id.rdv_list_button_consent)
         backButton = view.findViewById(R.id.rdv_list_button_back)
@@ -57,7 +55,15 @@ class RdvListFragment : Fragment() {
         consentButton.setOnClickListener {
             if (this::examen.isInitialized) {
                 val activity: MainActivity = activity as MainActivity
-                activity.displayQuestionsLayout(examen.typeExamen.formulaire.id_formulaire, examen)
+                println(examen.consentement)
+                if (!examen.consentement) {
+                    activity.displayQuestionsLayout(
+                        examen.typeExamen.formulaire.id_formulaire,
+                        examen
+                    )
+                } else {
+                    activity.displayAvisLayout(examen)
+                }
             } else {
                 println("this::examen.isInitialized = false")
                 Toast.makeText(requireContext(), "Error", Toast.LENGTH_LONG).show()
@@ -66,7 +72,6 @@ class RdvListFragment : Fragment() {
         }
         backButton.setOnClickListener {
             parentFragmentManager.popBackStackImmediate()
-
         }
         viewModel.state.observe(viewLifecycleOwner, ::updateState)
 
@@ -84,19 +89,23 @@ class RdvListFragment : Fragment() {
             }
             is RdvListState.SuccessState -> {
                 examen = state.examen
-                text1.append(
-                    android.text.format.DateFormat.format(
-                        "hh:mm",
-                        state.examen.date_examen
+                if (state.examen.consentement) {
+                    text1.text = "Vous avez participé à un examen, souhaitez-vous l'évaluer?"
+                } else {
+                    text1.append(
+                        android.text.format.DateFormat.format(
+                            "hh:mm",
+                            state.examen.date_examen
+                        )
                     )
-                )
-                text1.append(" ")
-                println(state.examen.toString())
-                //TODO
-                println(R.string.typeRDV.toString())
-                //text1.append(R.string.typeRDV.toString())
-                if (state.examen.typeExamen.libelle_type_examen != null){
-                    text1.append(state.examen.typeExamen.libelle_type_examen)
+                    text1.append(" ")
+                    println(state.examen.toString())
+                    //TODO
+                    println(R.string.typeRDV.toString())
+                    //text1.append(R.string.typeRDV.toString())
+                    if (state.examen.typeExamen.libelle_type_examen != null) {
+                        text1.append(state.examen.typeExamen.libelle_type_examen)
+                    }
                 }
             }
         }
