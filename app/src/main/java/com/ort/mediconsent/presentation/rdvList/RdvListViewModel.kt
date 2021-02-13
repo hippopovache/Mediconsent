@@ -6,14 +6,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.ort.mediconsent.data.repository.MediconsentExamenRepository
-import com.ort.mediconsent.data.repository.MediconsentUserRepository
 import com.ort.mediconsent.domain.model.Examen
 import com.ort.mediconsent.domain.repository.ExamenRepository
-import com.ort.mediconsent.domain.repository.UserRepository
 import kotlinx.coroutines.launch
 
 class RdvListViewModel(application: Application) : AndroidViewModel(application) {
-    val repository: ExamenRepository = MediconsentExamenRepository()
+    private val repository: ExamenRepository = MediconsentExamenRepository()
 
     private val _state = MutableLiveData<RdvListState>()
     val state: LiveData<RdvListState> get() = _state

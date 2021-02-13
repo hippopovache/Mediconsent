@@ -19,7 +19,6 @@ class SearchViewModel(application: Application) : AndroidViewModel(application) 
         _state.value = SearchState.LoadingState
         viewModelScope.launch {
             try {
-                println("yo")
                 _state.value =
                     SearchState.SuccessState(repository.getUserRdvForToday(firstname, name))
             } catch (e: Exception) {

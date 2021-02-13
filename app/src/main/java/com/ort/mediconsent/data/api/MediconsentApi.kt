@@ -1,6 +1,7 @@
 package com.ort.mediconsent.data.api
 
 import com.ort.mediconsent.data.model.ApiExamen
+import com.ort.mediconsent.data.model.ApiQuestion
 import com.ort.mediconsent.data.model.ApiUtilisateur
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -27,4 +28,9 @@ interface MediconsentApi {
     suspend fun getExamenById(
         @Path("id") id: Int
     ): ApiExamen
+
+    @GET("questions/formulaire/{id}")
+    suspend fun getExamenQuestions(
+        @Path("id") id: Int
+    ): List<ApiQuestion>
 }

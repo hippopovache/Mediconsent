@@ -2,16 +2,16 @@ package com.ort.mediconsent.data.repository
 
 
 import com.ort.mediconsent.data.api.MediconsentApi
-import com.ort.mediconsent.data.model.ApiUtilisateur
-import com.ort.mediconsent.domain.model.Utilisateur
-import com.ort.mediconsent.domain.repository.UserRepository
+import com.ort.mediconsent.data.model.ApiQuestion
+import com.ort.mediconsent.domain.model.Question
+import com.ort.mediconsent.domain.repository.QuestionRepository
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 
-class MediconsentUserRepository : UserRepository {
+class MediconsentQuestionRepository : QuestionRepository {
     private val retrofit: Retrofit
     private val retrofitLocal: Retrofit
 
@@ -39,16 +39,18 @@ class MediconsentUserRepository : UserRepository {
     private val apiLocal = retrofitLocal.create(MediconsentApi::class.java)
 
 
-    override suspend fun getUserConnect(nom_utilisateur: String, mdp: String): Utilisateur {
-        return apiLocal.getUserConnect(nom_utilisateur, mdp).toUtilisateur()
+    override suspend fun getExamenQuestions(idFormulaire: Int): List<Question> {
+        return api.getExamenQuestions(idFormulaire).map {
+            it.toQuestion()
+        }
     }
 
-    private fun ApiUtilisateur.toUtilisateur() = Utilisateur(
-        this.id_utilisateur,
-        this.nom_utilisateur,
-        this.prenom_utilisateur,
-        this.mot_de_passe_utilisateur,
-        this.numero_securite_sociale
+    private fun ApiQuestion.toQuestion() = Question(
+        this.id_question,
+        this.libelle_question,
+        this.isCheckbox,
+        this.icone
     )
+
 
 }

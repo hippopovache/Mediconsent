@@ -3,16 +3,12 @@ package com.ort.mediconsent.data.repository
 
 import com.ort.mediconsent.data.api.MediconsentApi
 import com.ort.mediconsent.data.model.ApiExamen
-import com.ort.mediconsent.data.model.ApiUtilisateur
 import com.ort.mediconsent.domain.model.Examen
-import com.ort.mediconsent.domain.model.Utilisateur
 import com.ort.mediconsent.domain.repository.ExamenRepository
-import com.ort.mediconsent.domain.repository.UserRepository
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import java.lang.Exception
 
 
 class MediconsentExamenRepository : ExamenRepository {
@@ -44,7 +40,7 @@ class MediconsentExamenRepository : ExamenRepository {
 
 
     override suspend fun getUserRdvForToday(firstname: String, name: String): Examen {
-            return apiLocal.getUserRdvForToday(firstname, name)[0].toExamen()
+        return apiLocal.getUserRdvForToday(firstname, name)[0].toExamen()
     }
 
     override suspend fun getExamenById(id: Int): Examen {

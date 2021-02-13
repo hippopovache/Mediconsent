@@ -6,9 +6,12 @@
     android:orientation="vertical">
 
     <TextView
+        android:id="@+id/question_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="40dp"
+        android:contentDescription="@string/answerunder"
+        android:labelFor="@id/question_edittext"
         android:text="@string/longText"
         android:textAlignment="center"
         android:textSize="18sp" />
@@ -20,6 +23,7 @@
         android:layout_height="wrap_content">
 
         <RadioButton
+            android:id="@+id/question_yes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="-15dp"
@@ -27,28 +31,42 @@
             android:text="@string/yes" />
 
         <RadioButton
+            android:id="@+id/question_no"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/no" />
     </RadioGroup>
 
+    <EditText
+        android:id="@+id/question_edittext"
+        android:layout_width="match_parent"
+        android:layout_height="130dp"
+        android:layout_marginHorizontal="40dp"
+        android:importantForAutofill="no"
+        android:inputType="text" />
+
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:gravity="center"
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/validate"
+            android:id="@+id/question_btn_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="5dp"
-            android:text="@string/validate" />
+            android:layout_marginHorizontal="20dp"
+            android:text="@string/back" />
 
         <Button
+            android:id="@+id/question_btn_next"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:text="@string/back" />
+            android:layout_marginHorizontal="20dp"
+            android:text="@string/next" />
+
     </LinearLayout>
+
+
 </LinearLayout>

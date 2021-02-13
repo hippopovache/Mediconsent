@@ -10,13 +10,15 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.ort.mediconsent.R
-import java.time.format.DateTimeFormatter
+import com.ort.mediconsent.domain.model.Examen
+import com.ort.mediconsent.presentation.MainActivity
 
-class RdvListFragment() : Fragment() {
+class RdvListFragment : Fragment() {
 
     private lateinit var text1: TextView
     private lateinit var consentButton: Button
     private lateinit var backButton: Button
+    private lateinit var examen: Examen
 
     private val viewModel: RdvListViewModel by viewModels()
 
@@ -53,9 +55,18 @@ class RdvListFragment() : Fragment() {
         backButton = view.findViewById(R.id.rdv_list_button_back)
 
         consentButton.setOnClickListener {
+            if (this::examen.isInitialized) {
+                val activity: MainActivity = activity as MainActivity
+                activity.displayQuestionsLayout(examen.typeExamen.formulaire.id_formulaire, examen)
+            } else {
+                println("this::examen.isInitialized = false")
+                Toast.makeText(requireContext(), "Error", Toast.LENGTH_LONG).show()
+            }
+
         }
         backButton.setOnClickListener {
             parentFragmentManager.popBackStackImmediate()
+
         }
         viewModel.state.observe(viewLifecycleOwner, ::updateState)
 
@@ -72,10 +83,21 @@ class RdvListFragment() : Fragment() {
             is RdvListState.LoadingState -> {
             }
             is RdvListState.SuccessState -> {
-                text1.append(android.text.format.DateFormat.format("hh:mm", state.examen.date_examen))
+                examen = state.examen
+                text1.append(
+                    android.text.format.DateFormat.format(
+                        "hh:mm",
+                        state.examen.date_examen
+                    )
+                )
                 text1.append(" ")
-                text1.append(R.string.typeRDV.toString())
-                text1.append(state.examen.typeExamen.libelle_type_examen)
+                println(state.examen.toString())
+                //TODO
+                println(R.string.typeRDV.toString())
+                //text1.append(R.string.typeRDV.toString())
+                if (state.examen.typeExamen.libelle_type_examen != null){
+                    text1.append(state.examen.typeExamen.libelle_type_examen)
+                }
             }
         }
     }
