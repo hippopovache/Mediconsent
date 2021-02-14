@@ -8,5 +8,5 @@ data class Formulaire(
     val langage: Langage,
     val version: Double,
     val date: Date,
-    val typeExamen: TypeExamen,
+    //var typeExamen: TypeExamen,
 )

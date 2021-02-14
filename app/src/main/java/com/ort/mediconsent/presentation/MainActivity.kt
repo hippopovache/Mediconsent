@@ -43,9 +43,9 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun displaySignatureLayout(idExamen: Int, reponses: List<Reponse>) {
+    fun displaySignatureLayout(examen: Examen, reponses: List<Reponse>) {
         supportFragmentManager.commit {
-            replace(R.id.fragment_container, SignatureFragment.newInstance(idExamen, reponses))
+            replace(R.id.fragment_container, SignatureFragment.newInstance(examen, reponses))
             addToBackStack(null)
         }
     }

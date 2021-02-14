@@ -10,7 +10,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.github.gcacace.signaturepad.views.SignaturePad
 import com.ort.mediconsent.R
+import com.ort.mediconsent.domain.model.Examen
 import com.ort.mediconsent.domain.model.Reponse
+import com.ort.mediconsent.presentation.MainActivity
 
 class SignatureFragment : Fragment() {
 
@@ -19,19 +21,20 @@ class SignatureFragment : Fragment() {
     private lateinit var backButton: Button
     private lateinit var validateButton: Button
     private lateinit var resetButton: Button
+    private lateinit var examen: Examen
 
     private val signatureViewModel: SignatureViewModel by viewModels()
 
     companion object {
         private const val KEY_ID = "key_id"
-        fun newInstance(id: Int, reponses: List<Reponse>): SignatureFragment {
+        fun newInstance(examen: Examen, reponses: List<Reponse>): SignatureFragment {
 
             val bundle = Bundle()
-            bundle.putInt(KEY_ID, id)
 
             val fragment = SignatureFragment()
             fragment.arguments = bundle
             fragment.reponses = reponses
+            fragment.examen = examen
 
             return fragment
         }
@@ -62,9 +65,8 @@ class SignatureFragment : Fragment() {
         }
 
         validateButton.setOnClickListener {
-            //TODO send signature.signatureBitmap
             signatureViewModel.sendReponses(reponses)
-            signatureViewModel.sendSignature(signature.signatureBitmap)
+            signatureViewModel.sendSignature(examen, signature.signatureBitmap)
 
         }
         resetButton.setOnClickListener {
@@ -84,6 +86,29 @@ class SignatureFragment : Fragment() {
             is SignatureState.LoadingState -> {
             }
             is SignatureState.SuccessState -> {
+                Toast.makeText(
+                    requireContext(),
+                    "Enregistrement éfféctué, revenez après votre examen afin de le noter",
+                    Toast.LENGTH_LONG
+                ).show()
+                val activity: MainActivity = activity as MainActivity
+                activity.displaySearchLayout()
+            }
+        }
+    }
+
+    private fun updateState(state: ReponseState) {
+        when (state) {
+            is ReponseState.ErrorState -> {
+                Toast.makeText(
+                    requireContext(),
+                    "Erreur dans l'envoi des réponses",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+            is ReponseState.LoadingState -> {
+            }
+            is ReponseState.SuccessState -> {
 
             }
         }

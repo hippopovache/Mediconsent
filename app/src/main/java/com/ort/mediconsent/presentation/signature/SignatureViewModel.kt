@@ -7,6 +7,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.ort.mediconsent.data.repository.MediconsentReponseRepository
+import com.ort.mediconsent.domain.model.Examen
 import com.ort.mediconsent.domain.model.Reponse
 import com.ort.mediconsent.domain.repository.ReponseRepository
 import kotlinx.coroutines.launch
@@ -15,26 +16,27 @@ class SignatureViewModel(application: Application) : AndroidViewModel(applicatio
     private val repository: ReponseRepository = MediconsentReponseRepository()
 
     private val _state = MutableLiveData<SignatureState>()
+    private val _ReponseState = MutableLiveData<ReponseState>()
     val state: LiveData<SignatureState> get() = _state
 
     fun sendReponses(reponses: List<Reponse>) {
-        _state.value = SignatureState.LoadingState
+        _ReponseState.value = ReponseState.LoadingState
         viewModelScope.launch {
             try {
                 repository.sendReponses(reponses)
-                _state.value = SignatureState.SuccessState
+                _ReponseState.value = ReponseState.SuccessState
             } catch (e: Exception) {
                 println("Exception : $e")
-                _state.value = SignatureState.ErrorState
+                _ReponseState.value = ReponseState.ErrorState
             }
         }
     }
 
-    fun sendSignature(bitmap: Bitmap) {
+    fun sendSignature(examen: Examen, bitmap: Bitmap) {
         _state.value = SignatureState.LoadingState
         viewModelScope.launch {
             try {
-                repository.sendSignature(bitmap)
+                repository.sendSignature(examen, bitmap)
                 _state.value = SignatureState.SuccessState
             } catch (e: Exception) {
                 println("Exception : $e")

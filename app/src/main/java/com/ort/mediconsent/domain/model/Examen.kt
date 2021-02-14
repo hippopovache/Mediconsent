@@ -4,13 +4,13 @@ import java.util.*
 
 data class Examen(
     val id_examen: Int,
-    val typeExamen: TypeExamen,
+    val type_examen: TypeExamen,
     val etablissement: Etablissement?,
     var avis: Avis?,
     val date_examen: Date,
-    val consentement: Boolean,
+    var consentement: Boolean,
     val doc_consentement: String?,
-    val signature: String?,
+    var signature: String?,
     val annuler: Boolean?,
     val date_annulation: Date?,
 )

@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.ort.mediconsent.R
@@ -58,15 +59,14 @@ class RdvListFragment : Fragment() {
                 println(examen.consentement)
                 if (!examen.consentement) {
                     activity.displayQuestionsLayout(
-                        examen.typeExamen.formulaire.id_formulaire,
+                        examen.type_examen.formulaire.id_formulaire,
                         examen
                     )
                 } else {
                     activity.displayAvisLayout(examen)
                 }
             } else {
-                println("this::examen.isInitialized = false")
-                Toast.makeText(requireContext(), "Error", Toast.LENGTH_LONG).show()
+                Toast.makeText(requireContext(), "Error", Toast.LENGTH_SHORT).show()
             }
 
         }
@@ -83,28 +83,27 @@ class RdvListFragment : Fragment() {
     private fun updateState(state: RdvListState) {
         when (state) {
             is RdvListState.ErrorState -> {
-                Toast.makeText(requireContext(), "Error", Toast.LENGTH_LONG).show()
+                Toast.makeText(requireContext(), "Error", Toast.LENGTH_SHORT).show()
             }
             is RdvListState.LoadingState -> {
             }
             is RdvListState.SuccessState -> {
                 examen = state.examen
                 if (state.examen.consentement) {
-                    text1.text = "Vous avez participé à un examen, souhaitez-vous l'évaluer?"
+                    if (state.examen.avis == null) {
+                        text1.text = "Vous avez efféctué à un examen, souhaitez-vous l'évaluer?"
+                    } else {
+                        text1.text = "Vous avez éfféctué un examen et l'avez déjà évalué."
+                        consentButton.isVisible = false
+                    }
                 } else {
-                    text1.append(
-                        android.text.format.DateFormat.format(
-                            "hh:mm",
-                            state.examen.date_examen
-                        )
-                    )
                     text1.append(" ")
                     println(state.examen.toString())
                     //TODO
                     println(R.string.typeRDV.toString())
                     //text1.append(R.string.typeRDV.toString())
-                    if (state.examen.typeExamen.libelle_type_examen != null) {
-                        text1.append(state.examen.typeExamen.libelle_type_examen)
+                    if (state.examen.type_examen.libelle_type_examen != null) {
+                        text1.append(state.examen.type_examen.libelle_type_examen)
                     }
                 }
             }

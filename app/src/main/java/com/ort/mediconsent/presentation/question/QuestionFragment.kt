@@ -78,7 +78,7 @@ class QuestionFragment : Fragment() {
                     Toast.makeText(
                         requireContext(),
                         "Veuillez renseigner les informations",
-                        Toast.LENGTH_LONG
+                        Toast.LENGTH_SHORT
                     ).show()
                 } else {
                     if (edittext.text.toString() != "") {
@@ -86,15 +86,14 @@ class QuestionFragment : Fragment() {
                             Reponse(
                                 examen,
                                 question,
-                                edittext.text.toString(),
                                 edittext.text.toString()
                             )
                         )
                     } else {
                         if (radioGroup.checkedRadioButtonId == R.id.question_yes) {
-                            reponses.add(Reponse(examen, question, "Oui", "Oui"))
+                            reponses.add(Reponse(examen, question, "Oui"))
                         } else {
-                            reponses.add(Reponse(examen, question, "Non", "Non"))
+                            reponses.add(Reponse(examen, question, "Non"))
                         }
                     }
                     index = questions.indexOf(question)
@@ -106,7 +105,7 @@ class QuestionFragment : Fragment() {
                             Toast.LENGTH_SHORT
                         ).show()
                         val activity: MainActivity = activity as MainActivity
-                        activity.displaySignatureLayout(examen.id_examen, reponses)
+                        activity.displaySignatureLayout(examen, reponses)
                     } else {
                         question = questions[index]
                         edittext.setText("")
@@ -141,7 +140,7 @@ class QuestionFragment : Fragment() {
     private fun updateState(state: QuestionState) {
         when (state) {
             is QuestionState.ErrorState -> {
-                Toast.makeText(requireContext(), "Error question", Toast.LENGTH_LONG).show()
+                Toast.makeText(requireContext(), "Erreur question", Toast.LENGTH_SHORT).show()
             }
             is QuestionState.LoadingState -> {
             }

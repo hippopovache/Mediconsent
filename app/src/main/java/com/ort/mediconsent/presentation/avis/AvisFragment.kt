@@ -13,6 +13,7 @@ import androidx.fragment.app.viewModels
 import com.ort.mediconsent.R
 import com.ort.mediconsent.domain.model.Avis
 import com.ort.mediconsent.domain.model.Examen
+import com.ort.mediconsent.presentation.MainActivity
 
 class AvisFragment : Fragment() {
 
@@ -60,9 +61,10 @@ class AvisFragment : Fragment() {
                     Toast.LENGTH_SHORT
                 ).show()
             } else {
+                println(ratingBar.rating.toInt())
                 avisViewModel.sendAvis(
                     examen,
-                    Avis(0, ratingBar.rating.toDouble(), comment.text.toString())
+                    Avis(0, ratingBar.rating.toInt(), comment.text.toString())
                 )
             }
         }
@@ -80,7 +82,13 @@ class AvisFragment : Fragment() {
             is AvisState.LoadingState -> {
             }
             is AvisState.SuccessState -> {
-
+                Toast.makeText(
+                    requireContext(),
+                    "Merci pour votre avis",
+                    Toast.LENGTH_LONG
+                ).show()
+                val activity: MainActivity = activity as MainActivity
+                activity.displaySearchLayout()
             }
         }
     }

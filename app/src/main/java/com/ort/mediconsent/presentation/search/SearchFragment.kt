@@ -64,7 +64,6 @@ class SearchFragment : Fragment() {
         is SearchState.LoadingState -> {
         }
         is SearchState.SuccessState -> {
-            Toast.makeText(requireContext(), "Examen trouvé", Toast.LENGTH_LONG).show()
             val activity: MainActivity = activity as MainActivity
             activity.displayRdvListLayout(state.examen.id_examen)
         }

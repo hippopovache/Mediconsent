@@ -6,6 +6,7 @@ import com.ort.mediconsent.data.model.ApiQuestion
 import com.ort.mediconsent.data.model.ApiUtilisateur
 import com.ort.mediconsent.domain.model.Avis
 import com.ort.mediconsent.domain.model.Examen
+import com.ort.mediconsent.domain.model.Reponse
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.PUT
@@ -51,5 +52,10 @@ interface MediconsentApi {
     @PUT("examen/save/")
     suspend fun updateExamen(
         @Body examen: Examen
+    )
+
+    @PUT("reponse/save/")
+    suspend fun insertReponse(
+        @Body reponse: Reponse
     )
 }

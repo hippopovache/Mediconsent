@@ -29,7 +29,7 @@
     <string name="app_name" translatable="false">Mediconsent</string>
     <string name="longText">This is just a long text to test the application, you shoul not see this on production. This is a dev tool.</string>
     <string name="enterFirstName">Enter your firstname</string>
-    <string name="rendezvous">"Hello, you have a planned appointment today at "</string>
+    <string name="rendezvous">"Hello, you have a planned appointment today : a "</string>
     <string name="answerunder">Answer under</string>
     <string name="next">next</string>
     <string name="reset">reset</string>
