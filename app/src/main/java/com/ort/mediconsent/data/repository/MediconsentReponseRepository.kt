@@ -13,6 +13,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.io.ByteArrayOutputStream
+import java.io.File
 
 
 class MediconsentReponseRepository : ReponseRepository {
@@ -51,12 +52,15 @@ class MediconsentReponseRepository : ReponseRepository {
         }
     }
 
-    override suspend fun sendSignature(examen: Examen, bitmap: Bitmap) {
+    override suspend fun sendSignaturePdf(examen: Examen, file: File, bitmap: Bitmap) {
         val baos = ByteArrayOutputStream()
         bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos)
         val b = baos.toByteArray()
         val encodedImageString = Base64.encodeToString(b, Base64.DEFAULT)
         examen.signature = encodedImageString
+
+        val encodedPdfString = Base64.encodeToString(file.readBytes(), Base64.NO_WRAP)
+        examen.doc_consentement = encodedPdfString
         examen.consentement = true
         apiLocal.updateExamen(examen)
     }

@@ -11,23 +11,34 @@ import androidx.fragment.app.viewModels
 import com.github.gcacace.signaturepad.views.SignaturePad
 import com.ort.mediconsent.R
 import com.ort.mediconsent.domain.model.Examen
+import com.ort.mediconsent.domain.model.Question
 import com.ort.mediconsent.domain.model.Reponse
 import com.ort.mediconsent.presentation.MainActivity
+
 
 class SignatureFragment : Fragment() {
 
     private lateinit var reponses: List<Reponse>
+    private lateinit var questions: List<Question>
     private lateinit var signature: SignaturePad
     private lateinit var backButton: Button
     private lateinit var validateButton: Button
     private lateinit var resetButton: Button
     private lateinit var examen: Examen
+    private lateinit var prenom: String
+    private lateinit var nom: String
 
     private val signatureViewModel: SignatureViewModel by viewModels()
 
     companion object {
         private const val KEY_ID = "key_id"
-        fun newInstance(examen: Examen, reponses: List<Reponse>): SignatureFragment {
+        fun newInstance(
+            examen: Examen,
+            reponses: List<Reponse>,
+            questions: List<Question>,
+            prenom: String,
+            nom: String
+        ): SignatureFragment {
 
             val bundle = Bundle()
 
@@ -35,6 +46,9 @@ class SignatureFragment : Fragment() {
             fragment.arguments = bundle
             fragment.reponses = reponses
             fragment.examen = examen
+            fragment.nom = nom
+            fragment.prenom = prenom
+            fragment.questions = questions
 
             return fragment
         }
@@ -52,8 +66,6 @@ class SignatureFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         signatureViewModel.state.observe(viewLifecycleOwner, ::updateState)
-        signatureViewModel.sendReponses(reponses)
-
         signature = view.findViewById(R.id.signature_pad)
         backButton = view.findViewById(R.id.signature_btn_back)
         validateButton = view.findViewById(R.id.signature_btn_validate)
@@ -65,9 +77,18 @@ class SignatureFragment : Fragment() {
         }
 
         validateButton.setOnClickListener {
-            signatureViewModel.sendReponses(reponses)
-            signatureViewModel.sendSignature(examen, signature.signatureBitmap)
+            if (!signature.isEmpty) {
 
+
+                val activity: MainActivity = activity as MainActivity
+                activity.displayPdfLayout(examen, questions, reponses, signature.signatureBitmap, prenom, nom)
+            } else {
+                Toast.makeText(
+                    requireContext(),
+                    "Merci de renseigner une signature",
+                    Toast.LENGTH_LONG
+                ).show()
+            }
         }
         resetButton.setOnClickListener {
             signature.clear()

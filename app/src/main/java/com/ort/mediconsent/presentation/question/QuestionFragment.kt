@@ -26,12 +26,14 @@ class QuestionFragment : Fragment() {
     private lateinit var radioGroup: RadioGroup
     private lateinit var questions: List<Question>
     private lateinit var examen: Examen
+    private lateinit var prenom: String
+    private lateinit var nom: String
 
     private val questionViewModel: QuestionViewModel by viewModels()
 
     companion object {
         private const val KEY_ID = "key_id"
-        fun newInstance(id: Int, examenGet: Examen): QuestionFragment {
+        fun newInstance(id: Int, examenGet: Examen, prenom: String, nom: String): QuestionFragment {
 
             val bundle = Bundle()
             bundle.putInt(KEY_ID, id)
@@ -39,6 +41,8 @@ class QuestionFragment : Fragment() {
             val fragment = QuestionFragment()
             fragment.arguments = bundle
             fragment.examen = examenGet
+            fragment.nom = nom
+            fragment.prenom = prenom
 
             return fragment
         }
@@ -105,7 +109,7 @@ class QuestionFragment : Fragment() {
                             Toast.LENGTH_SHORT
                         ).show()
                         val activity: MainActivity = activity as MainActivity
-                        activity.displaySignatureLayout(examen, reponses)
+                        activity.displaySignatureLayout(examen, reponses, questions, prenom, nom)
                     } else {
                         question = questions[index]
                         edittext.setText("")

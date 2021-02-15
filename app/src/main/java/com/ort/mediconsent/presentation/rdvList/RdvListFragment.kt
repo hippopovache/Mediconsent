@@ -20,18 +20,22 @@ class RdvListFragment : Fragment() {
     private lateinit var consentButton: Button
     private lateinit var backButton: Button
     private lateinit var examen: Examen
+    private lateinit var prenom: String
+    private lateinit var nom: String
 
     private val viewModel: RdvListViewModel by viewModels()
 
     companion object {
         private const val KEY_ID = "key_id"
 
-        fun newInstance(id: Int): RdvListFragment {
+        fun newInstance(id: Int, prenom: String, nom: String): RdvListFragment {
             val bundle = Bundle()
             bundle.putInt(KEY_ID, id)
 
             val fragment = RdvListFragment()
             fragment.arguments = bundle
+            fragment.nom = nom
+            fragment.prenom = prenom
 
             return fragment
         }
@@ -60,7 +64,7 @@ class RdvListFragment : Fragment() {
                 if (!examen.consentement) {
                     activity.displayQuestionsLayout(
                         examen.type_examen.formulaire.id_formulaire,
-                        examen
+                        examen, prenom, nom
                     )
                 } else {
                     activity.displayAvisLayout(examen)

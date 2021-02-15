@@ -9,7 +9,7 @@ data class Examen(
     var avis: Avis?,
     val date_examen: Date,
     var consentement: Boolean,
-    val doc_consentement: String?,
+    var doc_consentement: String?,
     var signature: String?,
     val annuler: Boolean?,
     val date_annulation: Date?,

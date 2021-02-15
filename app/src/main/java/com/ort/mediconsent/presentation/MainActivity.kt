@@ -1,13 +1,16 @@
 package com.ort.mediconsent.presentation
 
+import android.graphics.Bitmap
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.commit
 import com.ort.mediconsent.R
 import com.ort.mediconsent.domain.model.Examen
+import com.ort.mediconsent.domain.model.Question
 import com.ort.mediconsent.domain.model.Reponse
 import com.ort.mediconsent.presentation.avis.AvisFragment
 import com.ort.mediconsent.presentation.connect.ConnectFragment
+import com.ort.mediconsent.presentation.pdf.PdfFragment
 import com.ort.mediconsent.presentation.question.QuestionFragment
 import com.ort.mediconsent.presentation.rdvList.RdvListFragment
 import com.ort.mediconsent.presentation.search.SearchFragment
@@ -30,22 +33,34 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun displayRdvListLayout(id: Int) {
+    fun displayRdvListLayout(id: Int, prenom: String, nom: String) {
         supportFragmentManager.commit {
-            replace(R.id.fragment_container, RdvListFragment.newInstance(id))
+            replace(R.id.fragment_container, RdvListFragment.newInstance(id, prenom, nom))
         }
     }
 
-    fun displayQuestionsLayout(idFormulaire: Int, examen: Examen) {
+    fun displayQuestionsLayout(idFormulaire: Int, examen: Examen, prenom: String, nom: String) {
         supportFragmentManager.commit {
-            replace(R.id.fragment_container, QuestionFragment.newInstance(idFormulaire, examen))
+            replace(
+                R.id.fragment_container,
+                QuestionFragment.newInstance(idFormulaire, examen, prenom, nom)
+            )
             addToBackStack(null)
         }
     }
 
-    fun displaySignatureLayout(examen: Examen, reponses: List<Reponse>) {
+    fun displaySignatureLayout(
+        examen: Examen,
+        reponses: List<Reponse>,
+        questions: List<Question>,
+        prenom: String,
+        nom: String
+    ) {
         supportFragmentManager.commit {
-            replace(R.id.fragment_container, SignatureFragment.newInstance(examen, reponses))
+            replace(
+                R.id.fragment_container,
+                SignatureFragment.newInstance(examen, reponses, questions, prenom, nom)
+            )
             addToBackStack(null)
         }
     }
@@ -54,6 +69,20 @@ class MainActivity : AppCompatActivity() {
         supportFragmentManager.commit {
             replace(R.id.fragment_container, AvisFragment.newInstance(examen))
             addToBackStack(null)
+        }
+    }
+
+    fun displayPdfLayout(
+        examen: Examen,
+        questions: List<Question>,
+        reponses: List<Reponse>,
+        signature: Bitmap, prenom: String, nom: String
+    ) {
+        supportFragmentManager.commit {
+            replace(
+                R.id.fragment_container,
+                PdfFragment.newInstance(examen, questions, reponses, signature, prenom, nom)
+            )
         }
     }
 }

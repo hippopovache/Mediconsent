@@ -11,6 +11,7 @@ import com.ort.mediconsent.domain.model.Examen
 import com.ort.mediconsent.domain.model.Reponse
 import com.ort.mediconsent.domain.repository.ReponseRepository
 import kotlinx.coroutines.launch
+import java.io.File
 
 class SignatureViewModel(application: Application) : AndroidViewModel(application) {
     private val repository: ReponseRepository = MediconsentReponseRepository()
@@ -32,11 +33,11 @@ class SignatureViewModel(application: Application) : AndroidViewModel(applicatio
         }
     }
 
-    fun sendSignature(examen: Examen, bitmap: Bitmap) {
+    fun sendSignaturePdf(examen: Examen, file: File, bitmap: Bitmap) {
         _state.value = SignatureState.LoadingState
         viewModelScope.launch {
             try {
-                repository.sendSignature(examen, bitmap)
+                repository.sendSignaturePdf(examen, file, bitmap)
                 _state.value = SignatureState.SuccessState
             } catch (e: Exception) {
                 println("Exception : $e")

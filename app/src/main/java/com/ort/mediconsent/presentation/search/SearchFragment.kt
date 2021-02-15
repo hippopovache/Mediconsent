@@ -65,7 +65,7 @@ class SearchFragment : Fragment() {
         }
         is SearchState.SuccessState -> {
             val activity: MainActivity = activity as MainActivity
-            activity.displayRdvListLayout(state.examen.id_examen)
+            activity.displayRdvListLayout(state.examen.id_examen, firstNameEditText.text.toString(), nameEditText.text.toString())
         }
     }
 
