@@ -96,6 +96,7 @@ class RdvListFragment : Fragment() {
                 if (state.examen.consentement) {
                     if (state.examen.avis == null) {
                         text1.text = getString(R.string.alreadyDidExam)
+                        consentButton.text = getString(R.string.review)
                     } else {
                         text1.text = getString(R.string.alreadyDidAll)
                         consentButton.isVisible = false

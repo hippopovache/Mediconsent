@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    android:background="@drawable/background_gradiant"
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical">
@@ -10,12 +11,14 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="40dp"
         android:labelFor="@id/question_edittext"
+        android:textStyle="bold"
         android:text="@string/signature"
         android:textAlignment="center"
-        android:textSize="18sp" />
+        android:textSize="22sp" />
 
     <com.github.gcacace.signaturepad.views.SignaturePad xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/signature_pad"
+
         android:layout_width="match_parent"
         android:layout_height="300dp"
         android:layout_marginTop="20dp"
@@ -31,7 +34,6 @@
         android:orientation="horizontal">
 
         <Button
-            style="@style/Widget.AppCompat.ButtonBar"
             android:id="@+id/signature_btn_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -39,7 +41,6 @@
             android:text="@string/back" />
 
         <Button
-            style="@style/Widget.AppCompat.ButtonBar"
             android:id="@+id/signature_btn_reset"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
