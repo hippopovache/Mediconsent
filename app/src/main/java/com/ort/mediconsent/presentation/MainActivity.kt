@@ -54,7 +54,7 @@ class MainActivity : AppCompatActivity() {
         reponses: List<Reponse>,
         questions: List<Question>,
         prenom: String,
-        nom: String
+        nom: String,
     ) {
         supportFragmentManager.commit {
             replace(
@@ -76,7 +76,7 @@ class MainActivity : AppCompatActivity() {
         examen: Examen,
         questions: List<Question>,
         reponses: List<Reponse>,
-        signature: Bitmap, prenom: String, nom: String
+        signature: Bitmap, prenom: String, nom: String,
     ) {
         supportFragmentManager.commit {
             replace(

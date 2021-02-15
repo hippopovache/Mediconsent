@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import com.github.gcacace.signaturepad.views.SignaturePad
 import com.ort.mediconsent.R
 import com.ort.mediconsent.domain.model.Examen
@@ -28,16 +27,13 @@ class SignatureFragment : Fragment() {
     private lateinit var prenom: String
     private lateinit var nom: String
 
-    private val signatureViewModel: SignatureViewModel by viewModels()
-
     companion object {
-        private const val KEY_ID = "key_id"
         fun newInstance(
             examen: Examen,
             reponses: List<Reponse>,
             questions: List<Question>,
             prenom: String,
-            nom: String
+            nom: String,
         ): SignatureFragment {
 
             val bundle = Bundle()
@@ -58,34 +54,35 @@ class SignatureFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View? {
         return inflater.inflate(R.layout.signature, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        signatureViewModel.state.observe(viewLifecycleOwner, ::updateState)
         signature = view.findViewById(R.id.signature_pad)
         backButton = view.findViewById(R.id.signature_btn_back)
         validateButton = view.findViewById(R.id.signature_btn_validate)
         resetButton = view.findViewById(R.id.signature_btn_reset)
-
-
-        arguments?.getInt(KEY_ID)?.let {
-            //signatureViewModel.getExamenQuestions(it)
-        }
 
         validateButton.setOnClickListener {
             if (!signature.isEmpty) {
 
 
                 val activity: MainActivity = activity as MainActivity
-                activity.displayPdfLayout(examen, questions, reponses, signature.signatureBitmap, prenom, nom)
+                activity.displayPdfLayout(
+                    examen,
+                    questions,
+                    reponses,
+                    signature.signatureBitmap,
+                    prenom,
+                    nom
+                )
             } else {
                 Toast.makeText(
                     requireContext(),
-                    "Merci de renseigner une signature",
+                    getText(R.string.fillInfo),
                     Toast.LENGTH_LONG
                 ).show()
             }
@@ -97,41 +94,5 @@ class SignatureFragment : Fragment() {
             parentFragmentManager.popBackStackImmediate()
         }
 
-    }
-
-    private fun updateState(state: SignatureState) {
-        when (state) {
-            is SignatureState.ErrorState -> {
-                Toast.makeText(requireContext(), "Error", Toast.LENGTH_LONG).show()
-            }
-            is SignatureState.LoadingState -> {
-            }
-            is SignatureState.SuccessState -> {
-                Toast.makeText(
-                    requireContext(),
-                    "Enregistrement éfféctué, revenez après votre examen afin de le noter",
-                    Toast.LENGTH_LONG
-                ).show()
-                val activity: MainActivity = activity as MainActivity
-                activity.displaySearchLayout()
-            }
-        }
-    }
-
-    private fun updateState(state: ReponseState) {
-        when (state) {
-            is ReponseState.ErrorState -> {
-                Toast.makeText(
-                    requireContext(),
-                    "Erreur dans l'envoi des réponses",
-                    Toast.LENGTH_SHORT
-                ).show()
-            }
-            is ReponseState.LoadingState -> {
-            }
-            is ReponseState.SuccessState -> {
-
-            }
-        }
     }
 }

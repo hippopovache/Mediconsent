@@ -1,3 +1,5 @@
+@file:Suppress("unused", "unused", "unused")
+
 package com.ort.mediconsent.presentation.connect
 
 import com.ort.mediconsent.domain.model.Utilisateur

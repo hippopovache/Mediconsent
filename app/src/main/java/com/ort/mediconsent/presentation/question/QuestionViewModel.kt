@@ -17,7 +17,7 @@ class QuestionViewModel(application: Application) : AndroidViewModel(application
     val state: LiveData<QuestionState> get() = _state
 
     fun getExamenQuestions(idFormulaire: Int): List<Question>? {
-        var questions: List<Question>? = null
+        val questions: List<Question>? = null
         _state.value = QuestionState.LoadingState
         viewModelScope.launch {
             try {

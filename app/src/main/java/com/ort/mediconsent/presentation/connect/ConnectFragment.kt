@@ -23,7 +23,7 @@ class ConnectFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View? {
         return inflater.inflate(R.layout.connect, container, false)
     }
@@ -45,7 +45,7 @@ class ConnectFragment : Fragment() {
                     connectUsername.text.toString(), connectPassword.text.toString()
                 )*/
             } else {
-                Toast.makeText(requireContext(), "Entrez un login et un mdp svp", Toast.LENGTH_LONG)
+                Toast.makeText(requireContext(), getText(R.string.fillInfo), Toast.LENGTH_SHORT)
                     .show()
             }
         }
@@ -61,10 +61,12 @@ class ConnectFragment : Fragment() {
     private fun updateState(state: ConnectState) {
         when (state) {
             is ConnectState.ErrorState -> {
-                Toast.makeText(requireContext(), "Mauvais login ou mdp", Toast.LENGTH_LONG).show()
+                Toast.makeText(requireContext(), getText(R.string.wrongConnect), Toast.LENGTH_SHORT)
+                    .show()
             }
             is ConnectState.LoadingState -> {
-                Toast.makeText(requireContext(), "Connexion", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), getText(R.string.connecting), Toast.LENGTH_SHORT)
+                    .show()
             }
             is ConnectState.SuccessState -> {
                 val activity: MainActivity? = activity as? MainActivity

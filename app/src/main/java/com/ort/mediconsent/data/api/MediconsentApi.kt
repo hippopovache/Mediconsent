@@ -1,10 +1,8 @@
 package com.ort.mediconsent.data.api
 
-import com.ort.mediconsent.data.model.ApiAvis
 import com.ort.mediconsent.data.model.ApiExamen
 import com.ort.mediconsent.data.model.ApiQuestion
 import com.ort.mediconsent.data.model.ApiUtilisateur
-import com.ort.mediconsent.domain.model.Avis
 import com.ort.mediconsent.domain.model.Examen
 import com.ort.mediconsent.domain.model.Reponse
 import retrofit2.http.Body
@@ -21,7 +19,7 @@ interface MediconsentApi {
     @GET("checkLogin2/{nom}/{mdp}")
     suspend fun getUserConnect(
         @Path("nom") nom: String,
-        @Path("mdp") mdp: String
+        @Path("mdp") mdp: String,
     ): ApiUtilisateur
 
     @GET("examen/{prenom}/{nom}")
@@ -32,30 +30,21 @@ interface MediconsentApi {
 
     @GET("examen/{id}")
     suspend fun getExamenById(
-        @Path("id") id: Int
+        @Path("id") id: Int,
     ): ApiExamen
 
     @GET("questions/formulaire/{id}")
     suspend fun getExamenQuestions(
-        @Path("id") id: Int
+        @Path("id") id: Int,
     ): List<ApiQuestion>
-
-    @PUT("avis/save/")
-    suspend fun sendAvis(
-        @Body avis: Avis
-    )
-
-    @GET("avis")
-    suspend fun getAvis(
-    ): List<ApiAvis>
 
     @PUT("examen/save/")
     suspend fun updateExamen(
-        @Body examen: Examen
+        @Body examen: Examen,
     )
 
     @PUT("reponse/save/")
     suspend fun insertReponse(
-        @Body reponse: Reponse
+        @Body reponse: Reponse,
     )
 }

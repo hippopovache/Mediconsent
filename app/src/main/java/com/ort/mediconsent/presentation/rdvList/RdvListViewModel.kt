@@ -17,7 +17,7 @@ class RdvListViewModel(application: Application) : AndroidViewModel(application)
     val state: LiveData<RdvListState> get() = _state
 
     fun getExamenDetails(id: Int): Examen? {
-        var examen: Examen? = null
+        val examen: Examen? = null
         _state.value = RdvListState.LoadingState
         viewModelScope.launch {
             try {

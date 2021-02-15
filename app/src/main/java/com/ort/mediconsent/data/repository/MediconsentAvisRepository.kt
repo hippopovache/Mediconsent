@@ -3,8 +3,6 @@ package com.ort.mediconsent.data.repository
 
 import com.google.gson.GsonBuilder
 import com.ort.mediconsent.data.api.MediconsentApi
-import com.ort.mediconsent.data.model.ApiAvis
-import com.ort.mediconsent.data.model.ApiExamenSave
 import com.ort.mediconsent.domain.model.Avis
 import com.ort.mediconsent.domain.model.Examen
 import com.ort.mediconsent.domain.repository.AvisRepository
@@ -48,24 +46,4 @@ class MediconsentAvisRepository : AvisRepository {
         examen.avis = avis
         apiLocal.updateExamen(examen)
     }
-
-    private fun ApiAvis.toAvis() = Avis(
-        this.id_avis,
-        this.notes,
-        this.commentaire
-    )
-
-    private fun Examen.toApiExamenSave() = ApiExamenSave(
-        this.id_examen,
-        this.type_examen.id_type_examen,
-        this.etablissement!!.id_etablissement,
-        this.avis!!.id_avis,
-        this.date_examen,
-        this.consentement,
-        this.doc_consentement,
-        this.signature,
-        this.annuler!!,
-        this.date_annulation
-    )
-
 }

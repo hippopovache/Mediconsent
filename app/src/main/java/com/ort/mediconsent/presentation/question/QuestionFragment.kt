@@ -52,7 +52,7 @@ class QuestionFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View? {
         return inflater.inflate(R.layout.question, container, false)
     }
@@ -68,7 +68,7 @@ class QuestionFragment : Fragment() {
         var index = 0
         yes = view.findViewById(R.id.question_yes)
         no = view.findViewById(R.id.question_no)
-        var reponses = mutableListOf<Reponse>()
+        val reponses = mutableListOf<Reponse>()
 
         questionViewModel.state.observe(viewLifecycleOwner, ::updateState)
 
@@ -81,7 +81,7 @@ class QuestionFragment : Fragment() {
                 if (edittext.text.toString() == "" && radioGroup.checkedRadioButtonId == -1) {
                     Toast.makeText(
                         requireContext(),
-                        "Veuillez renseigner les informations",
+                        getText(R.string.fillInfo),
                         Toast.LENGTH_SHORT
                     ).show()
                 } else {
@@ -95,9 +95,9 @@ class QuestionFragment : Fragment() {
                         )
                     } else {
                         if (radioGroup.checkedRadioButtonId == R.id.question_yes) {
-                            reponses.add(Reponse(examen, question, "Oui"))
+                            reponses.add(Reponse(examen, question, getString(R.string.yes)))
                         } else {
-                            reponses.add(Reponse(examen, question, "Non"))
+                            reponses.add(Reponse(examen, question, getString(R.string.no)))
                         }
                     }
                     index = questions.indexOf(question)
@@ -105,7 +105,7 @@ class QuestionFragment : Fragment() {
                     if (index >= questions.size) {
                         Toast.makeText(
                             requireContext(),
-                            "Merci pour vos réponses, vous pouvez signer maintenant",
+                            getText(R.string.thanksForAnswers),
                             Toast.LENGTH_SHORT
                         ).show()
                         val activity: MainActivity = activity as MainActivity
@@ -144,7 +144,7 @@ class QuestionFragment : Fragment() {
     private fun updateState(state: QuestionState) {
         when (state) {
             is QuestionState.ErrorState -> {
-                Toast.makeText(requireContext(), "Erreur question", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Error question", Toast.LENGTH_SHORT).show()
             }
             is QuestionState.LoadingState -> {
             }

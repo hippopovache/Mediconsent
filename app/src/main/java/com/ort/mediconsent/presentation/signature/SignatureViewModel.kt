@@ -17,18 +17,20 @@ class SignatureViewModel(application: Application) : AndroidViewModel(applicatio
     private val repository: ReponseRepository = MediconsentReponseRepository()
 
     private val _state = MutableLiveData<SignatureState>()
-    private val _ReponseState = MutableLiveData<ReponseState>()
+    private val _reponseState = MutableLiveData<ReponseState>()
     val state: LiveData<SignatureState> get() = _state
+    val reponseState: LiveData<ReponseState> get() = _reponseState
+
 
     fun sendReponses(reponses: List<Reponse>) {
-        _ReponseState.value = ReponseState.LoadingState
+        _reponseState.value = ReponseState.LoadingState
         viewModelScope.launch {
             try {
                 repository.sendReponses(reponses)
-                _ReponseState.value = ReponseState.SuccessState
+                _reponseState.value = ReponseState.SuccessState
             } catch (e: Exception) {
                 println("Exception : $e")
-                _ReponseState.value = ReponseState.ErrorState
+                _reponseState.value = ReponseState.ErrorState
             }
         }
     }

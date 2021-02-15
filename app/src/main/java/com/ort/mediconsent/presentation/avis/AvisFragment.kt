@@ -39,7 +39,7 @@ class AvisFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View? {
         return inflater.inflate(R.layout.review, container, false)
     }
@@ -84,7 +84,7 @@ class AvisFragment : Fragment() {
             is AvisState.SuccessState -> {
                 Toast.makeText(
                     requireContext(),
-                    "Merci pour votre avis",
+                    getText(R.string.thanks),
                     Toast.LENGTH_LONG
                 ).show()
                 val activity: MainActivity = activity as MainActivity

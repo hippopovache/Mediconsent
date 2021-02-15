@@ -45,7 +45,7 @@ class PdfFragment : Fragment() {
             reponses: List<Reponse>,
             signature: Bitmap,
             prenom: String,
-            nom: String
+            nom: String,
         ): PdfFragment {
 
             val bundle = Bundle()
@@ -66,7 +66,7 @@ class PdfFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View? {
         return inflater.inflate(R.layout.pdf_layout, container, false)
     }
@@ -74,6 +74,7 @@ class PdfFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         signatureViewModel.state.observe(viewLifecycleOwner, ::updateState)
+        signatureViewModel.reponseState.observe(viewLifecycleOwner, ::updateState)
         backButton = view.findViewById(R.id.pdf_btn_back)
         validateButton = view.findViewById(R.id.pdf_btn_validate)
         pdfView = view.findViewById(R.id.pdf_view)
@@ -83,8 +84,8 @@ class PdfFragment : Fragment() {
         val document = PdfDocument()
         val pageInfo = PdfDocument.PageInfo.Builder(600, 600, 1).create()
         val page: PdfDocument.Page = document.startPage(pageInfo)
-        val paint: Paint = Paint()
-        var x = 5F
+        val paint = Paint()
+        val x = 5F
         var y = 50F
         page.canvas.drawText("Formulaire de consentement", 230F, y, paint)
         y += paint.descent() - paint.ascent()
@@ -119,7 +120,7 @@ class PdfFragment : Fragment() {
         page.canvas.drawText("signature ", x, y, paint)
         y += paint.descent() - paint.ascent()
         y += paint.descent() - paint.ascent()
-        var signatureRescaled = Bitmap.createScaledBitmap(
+        val signatureRescaled = Bitmap.createScaledBitmap(
             signatureBitmap,
             (signatureBitmap.width * 0.1).toInt(),
             (signatureBitmap.height * 0.1).toInt(),
@@ -160,7 +161,7 @@ class PdfFragment : Fragment() {
             is SignatureState.SuccessState -> {
                 Toast.makeText(
                     requireContext(),
-                    "Enregistrement éfféctué, revenez après votre examen afin de le noter",
+                    getText(R.string.saveDone),
                     Toast.LENGTH_LONG
                 ).show()
                 val activity: MainActivity = activity as MainActivity
@@ -174,7 +175,7 @@ class PdfFragment : Fragment() {
             is ReponseState.ErrorState -> {
                 Toast.makeText(
                     requireContext(),
-                    "Erreur dans l'envoi des réponses",
+                    "Error",
                     Toast.LENGTH_SHORT
                 ).show()
             }

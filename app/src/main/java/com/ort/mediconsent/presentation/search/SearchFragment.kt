@@ -25,7 +25,7 @@ class SearchFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View? {
         return inflater.inflate(R.layout.search, container, false)
     }
@@ -47,7 +47,7 @@ class SearchFragment : Fragment() {
             } else {
                 Toast.makeText(
                     requireContext(),
-                    "Entrez un nom et un prénom svp",
+                    getText(R.string.fillInfo),
                     Toast.LENGTH_LONG
                 )
                     .show()
@@ -59,13 +59,18 @@ class SearchFragment : Fragment() {
 
     private fun updateState(state: SearchState) = when (state) {
         is SearchState.ErrorState -> {
-            Toast.makeText(requireContext(), "Pas d'éxamen trouvé", Toast.LENGTH_LONG).show()
+            Toast.makeText(requireContext(), getText(R.string.noExam), Toast.LENGTH_LONG)
+                .show()
         }
         is SearchState.LoadingState -> {
         }
         is SearchState.SuccessState -> {
             val activity: MainActivity = activity as MainActivity
-            activity.displayRdvListLayout(state.examen.id_examen, firstNameEditText.text.toString(), nameEditText.text.toString())
+            activity.displayRdvListLayout(
+                state.examen.id_examen,
+                firstNameEditText.text.toString(),
+                nameEditText.text.toString()
+            )
         }
     }
 

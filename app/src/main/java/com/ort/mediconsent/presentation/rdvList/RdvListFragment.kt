@@ -45,7 +45,7 @@ class RdvListFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View? {
         return inflater.inflate(R.layout.rdv_list, container, false)
     }
@@ -95,9 +95,9 @@ class RdvListFragment : Fragment() {
                 examen = state.examen
                 if (state.examen.consentement) {
                     if (state.examen.avis == null) {
-                        text1.text = "Vous avez efféctué à un examen, souhaitez-vous l'évaluer?"
+                        text1.text = getString(R.string.alreadyDidExam)
                     } else {
-                        text1.text = "Vous avez éfféctué un examen et l'avez déjà évalué."
+                        text1.text = getString(R.string.alreadyDidAll)
                         consentButton.isVisible = false
                     }
                 } else {
