@@ -48,7 +48,7 @@ class MediconsentReponseRepository : ReponseRepository {
     private val apiLocal = retrofitLocal.create(MediconsentApi::class.java)
     override suspend fun sendReponses(reponses: List<Reponse>) {
         for (reponse in reponses) {
-            apiLocal.insertReponse(reponse)
+            api.insertReponse(reponse)
         }
     }
 
@@ -62,7 +62,7 @@ class MediconsentReponseRepository : ReponseRepository {
         val encodedPdfString = Base64.encodeToString(file.readBytes(), Base64.NO_WRAP)
         examen.doc_consentement = encodedPdfString
         examen.consentement = true
-        apiLocal.updateExamen(examen)
+        api.updateExamen(examen)
     }
 
 

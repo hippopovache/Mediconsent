@@ -40,7 +40,7 @@ class MediconsentQuestionRepository : QuestionRepository {
 
 
     override suspend fun getExamenQuestions(idFormulaire: Int): List<Question> {
-        return apiLocal.getExamenQuestions(idFormulaire).map {
+        return api.getExamenQuestions(idFormulaire).map {
             it.toQuestion()
         }
     }

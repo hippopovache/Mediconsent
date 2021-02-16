@@ -40,7 +40,7 @@ class MediconsentUserRepository : UserRepository {
 
 
     override suspend fun getUserConnect(nom_utilisateur: String, mdp: String): Utilisateur {
-        return apiLocal.getUserConnect(nom_utilisateur, mdp).toUtilisateur()
+        return api.getUserConnect(nom_utilisateur, mdp).toUtilisateur()
     }
 
     private fun ApiUtilisateur.toUtilisateur() = Utilisateur(

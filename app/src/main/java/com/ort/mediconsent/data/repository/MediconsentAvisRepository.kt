@@ -44,6 +44,6 @@ class MediconsentAvisRepository : AvisRepository {
     private val apiLocal = retrofitLocal.create(MediconsentApi::class.java)
     override suspend fun sendAvis(examen: Examen, avis: Avis) {
         examen.avis = avis
-        apiLocal.updateExamen(examen)
+        api.updateExamen(examen)
     }
 }

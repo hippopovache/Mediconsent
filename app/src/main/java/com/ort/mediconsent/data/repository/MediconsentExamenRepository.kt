@@ -40,11 +40,11 @@ class MediconsentExamenRepository : ExamenRepository {
 
 
     override suspend fun getUserRdvForToday(firstname: String, name: String): Examen {
-        return apiLocal.getUserRdvForToday(firstname, name)[0].toExamen()
+        return api.getUserRdvForToday(firstname, name)[0].toExamen()
     }
 
     override suspend fun getExamenById(id: Int): Examen {
-        return apiLocal.getExamenById(id).toExamen()
+        return api.getExamenById(id).toExamen()
     }
 
     private fun ApiExamen.toExamen() = Examen(
