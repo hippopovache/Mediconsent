@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<lint>
+    <issue id="IconColors">
+        <ignore path="src/main/res/mipmap-xxhdpi/flag_en.png" />
+        <ignore path="src/main/res/mipmap-xxhdpi/flag_en.png" />
+    </issue>
+</lint>

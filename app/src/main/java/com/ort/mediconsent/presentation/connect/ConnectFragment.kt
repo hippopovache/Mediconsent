@@ -9,6 +9,7 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import com.ort.mediconsent.GlobalVariables
 import com.ort.mediconsent.R
 import com.ort.mediconsent.presentation.MainActivity
 
@@ -69,6 +70,7 @@ class ConnectFragment : Fragment() {
                     .show()
             }
             is ConnectState.SuccessState -> {
+                GlobalVariables.isConnected = true
                 val activity: MainActivity? = activity as? MainActivity
                 activity?.displaySearchLayout()
             }

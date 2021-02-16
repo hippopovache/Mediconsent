@@ -1,9 +1,13 @@
 package com.ort.mediconsent.presentation
 
+import com.ort.mediconsent.presentation.language.LocaleHelper
 import android.graphics.Bitmap
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.commit
+import com.ort.mediconsent.GlobalVariables
 import com.ort.mediconsent.R
 import com.ort.mediconsent.domain.model.Examen
 import com.ort.mediconsent.domain.model.Question
@@ -16,14 +20,49 @@ import com.ort.mediconsent.presentation.rdvList.RdvListFragment
 import com.ort.mediconsent.presentation.search.SearchFragment
 import com.ort.mediconsent.presentation.signature.SignatureFragment
 
+
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var m: Menu
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        supportFragmentManager.commit {
-            add(R.id.fragment_container, ConnectFragment())
+        if (GlobalVariables.isConnected) {
+            displaySearchLayout()
+        } else {
+            supportFragmentManager.commit {
+                add(R.id.fragment_container, ConnectFragment())
+            }
         }
+
     }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        super.onCreateOptionsMenu(menu)
+        val inflater = menuInflater
+        inflater.inflate(R.menu.menu, menu)
+        if (menu != null) {
+            m = menu
+        }
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        // switch kotlin
+        when (item.itemId) {
+            R.id.lang_en_btn -> {
+                LocaleHelper.setLocale(this, "en")
+            }
+            R.id.lang_fr_btn -> {
+                LocaleHelper.setLocale(this, "fr")
+            }
+        }
+        finish()
+        startActivity(intent)
+        return true
+    }
+
 
     fun displaySearchLayout() {
         supportFragmentManager.commit {
