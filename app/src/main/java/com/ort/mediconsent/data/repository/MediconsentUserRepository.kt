@@ -1,6 +1,7 @@
 package com.ort.mediconsent.data.repository
 
 
+import com.google.gson.GsonBuilder
 import com.ort.mediconsent.data.api.MediconsentApi
 import com.ort.mediconsent.data.model.ApiUtilisateur
 import com.ort.mediconsent.domain.model.Utilisateur
@@ -22,16 +23,20 @@ class MediconsentUserRepository : UserRepository {
             .addInterceptor(logging)
             .build()
 
+        val gson = GsonBuilder()
+            .setDateFormat("yyyy-MM-dd")
+            .create()
+
         retrofit = Retrofit.Builder()
             .baseUrl(MediconsentApi.BASE_URL)
             .client(client)
-            .addConverterFactory(GsonConverterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
 
         retrofitLocal = Retrofit.Builder()
             .baseUrl(MediconsentApi.BASE_URL_LOCAL)
             .client(client)
-            .addConverterFactory(GsonConverterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
     }
 

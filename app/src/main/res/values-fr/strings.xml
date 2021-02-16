@@ -15,13 +15,13 @@
     <string name="signature">Signature</string>
     <string name="longText">Ceci est juste un long texte pour tester l\'application, vous ne devriez pas voir ça en production. C\'est ou outil de développement.</string>
     <string name="enterFirstName">Entrez votre prénom</string>
-    <string name="rendezvous">"Bonjour, vous avez un rendez-vous programmé aujourd'hui : de type : "</string>
+    <string name="rendezvous">"Bonjour, vous avez un rendez-vous programmé aujourd'hui de type : "</string>
     <string name="answerunder">Répondez dans la case ci dessous</string>
     <string name="next">Suivant</string>
     <string name="reset">effacer</string>
-    <string name="alreadyDidExam">Vous avez efféctué à un examen, souhaitez-vous l\'évaluer?</string>
-    <string name="alreadyDidAll">Vous avez éfféctué un examen et l\'avez déjà évalué.</string>
-    <string name="saveDone">Enregistrement éfféctué, revenez après votre examen afin de le noter.</string>
+    <string name="alreadyDidExam">Vous avez effectué un examen, souhaitez-vous l\'évaluer?</string>
+    <string name="alreadyDidAll">Vous avez éffectué un examen et l\'avez déjà évalué.</string>
+    <string name="saveDone">Enregistrement éffectué, revenez après votre examen afin de le noter.</string>
     <string name="fillInfo">Veuillez renseigner les informations</string>
     <string name="thanksForAnswers">Merci pour vos réponses, vous pouvez signer maintenant.</string>
     <string name="noExam">Pas d\'éxamen trouvé aujourd\'hui</string>

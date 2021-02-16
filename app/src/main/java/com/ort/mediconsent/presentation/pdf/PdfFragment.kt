@@ -3,12 +3,14 @@ package com.ort.mediconsent.presentation.pdf
 import android.graphics.Bitmap
 import android.graphics.Paint
 import android.graphics.pdf.PdfDocument
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.github.barteksc.pdfviewer.PDFView
@@ -22,6 +24,8 @@ import com.ort.mediconsent.presentation.signature.SignatureState
 import com.ort.mediconsent.presentation.signature.SignatureViewModel
 import java.io.File
 import java.io.FileOutputStream
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 class PdfFragment : Fragment() {
@@ -71,6 +75,7 @@ class PdfFragment : Fragment() {
         return inflater.inflate(R.layout.pdf_layout, container, false)
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         signatureViewModel.state.observe(viewLifecycleOwner, ::updateState)
@@ -103,11 +108,12 @@ class PdfFragment : Fragment() {
         }
         page.canvas.drawText("Madame, Mademoiselle, Monsieur $nom $prenom", x, y, paint)
         y += paint.descent() - paint.ascent()
-        /*val parser = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss")
+
         val formatter = SimpleDateFormat("dd/MM/yyyy")
-        val formatedDate = formatter.format(parser.parse(examen.date_examen.toString()))*/
+        var date = Date(System.currentTimeMillis())
+        var dateToShow = formatter.format(date)
         page.canvas.drawText(
-            "a personnellement rempli cette fiche le ${examen.date_examen}",
+            "a personnellement rempli cette fiche le $dateToShow",
             x,
             y,
             paint

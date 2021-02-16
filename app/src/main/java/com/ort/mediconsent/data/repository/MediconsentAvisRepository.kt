@@ -24,7 +24,7 @@ class MediconsentAvisRepository : AvisRepository {
             .build()
 
         val gson = GsonBuilder()
-            .setDateFormat("yyyy-MM-dd'T'HH:mm:ss")
+            .setDateFormat("yyyy-MM-dd")
             .create()
 
         retrofit = Retrofit.Builder()
