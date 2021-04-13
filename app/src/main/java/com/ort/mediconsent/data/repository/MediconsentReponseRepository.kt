@@ -18,7 +18,6 @@ import java.io.File
 
 class MediconsentReponseRepository : ReponseRepository {
     private val retrofit: Retrofit
-    private val retrofitLocal: Retrofit
 
     init {
         val logging = HttpLoggingInterceptor()
@@ -36,16 +35,9 @@ class MediconsentReponseRepository : ReponseRepository {
             .client(client)
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
-
-        retrofitLocal = Retrofit.Builder()
-            .baseUrl(MediconsentApi.BASE_URL_LOCAL)
-            .client(client)
-            .addConverterFactory(GsonConverterFactory.create(gson))
-            .build()
     }
 
     private val api = retrofit.create(MediconsentApi::class.java)
-    private val apiLocal = retrofitLocal.create(MediconsentApi::class.java)
     override suspend fun sendReponses(reponses: List<Reponse>) {
         for (reponse in reponses) {
             api.insertReponse(reponse)

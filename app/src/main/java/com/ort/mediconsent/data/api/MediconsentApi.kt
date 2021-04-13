@@ -1,5 +1,6 @@
 package com.ort.mediconsent.data.api
 
+import com.ort.mediconsent.BuildConfig
 import com.ort.mediconsent.data.model.ApiExamen
 import com.ort.mediconsent.data.model.ApiQuestion
 import com.ort.mediconsent.data.model.ApiUtilisateur
@@ -12,8 +13,7 @@ import retrofit2.http.Path
 
 interface MediconsentApi {
     companion object {
-        const val BASE_URL = "http://194.183.220.233:9095/Mediconsent/rest/"
-        const val BASE_URL_LOCAL = "http://192.168.1.11:8080/rest/"
+        const val BASE_URL = BuildConfig.API_URL
     }
 
     @GET("checkLogin2/{nom}/{mdp}")

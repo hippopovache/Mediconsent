@@ -14,7 +14,6 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class MediconsentAvisRepository : AvisRepository {
     private val retrofit: Retrofit
-    private val retrofitLocal: Retrofit
 
     init {
         val logging = HttpLoggingInterceptor()
@@ -32,16 +31,9 @@ class MediconsentAvisRepository : AvisRepository {
             .client(client)
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
-
-        retrofitLocal = Retrofit.Builder()
-            .baseUrl(MediconsentApi.BASE_URL_LOCAL)
-            .client(client)
-            .addConverterFactory(GsonConverterFactory.create(gson))
-            .build()
-    }
+            }
 
     private val api = retrofit.create(MediconsentApi::class.java)
-    private val apiLocal = retrofitLocal.create(MediconsentApi::class.java)
     override suspend fun sendAvis(examen: Examen, avis: Avis) {
         examen.avis = avis
         api.updateExamen(examen)

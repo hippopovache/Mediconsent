@@ -21,6 +21,12 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+
+            //Changer l'adresse de l'API ici (avec toujours le / de la fin de l'url)
+            buildConfigField("String", "API_URL", '"http://194.183.220.233:9095/Mediconsent/rest/"')
+        }
+        debug {
+            buildConfigField("String", "API_URL", '"http://192.168.1.11:8080/rest/"')
         }
     }
     compileOptions {
